@@ -1629,3 +1629,4 @@ Caused by: org.codehaus.plexus.util.xml.pull.XmlPullParserException: only 1.0 is
 2025-09-06 18:10:07,703 [Worker-31: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /home/emanuel/IUA/4to/iw3/workspace/iw3/src/test/resources
 2025-09-06 18:17:44,463 [Worker-30: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src/main/resources to target/classes
 2025-09-06 18:17:44,467 [Worker-30: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /home/emanuel/IUA/4to/iw3/workspace/iw3/src/test/resources
+2025-09-07 15:09:19,306 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
