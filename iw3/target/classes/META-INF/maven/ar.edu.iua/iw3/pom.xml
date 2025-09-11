@@ -28,11 +28,6 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
-		<!-- Ema: Agrego estas 4 lineas para que no tire el error de java.nio.charset.MalformedInputException -->
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    	<project.build.resources.encoding>UTF-8</project.build.resources.encoding>
-    	<spring-boot.version>3.5.4</spring-boot.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -76,12 +71,6 @@
 	</dependencies>
 
 	<build>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>false</filtering>
-			</resource>
-		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

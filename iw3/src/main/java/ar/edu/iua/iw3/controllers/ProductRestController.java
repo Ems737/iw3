@@ -1,17 +1,17 @@
 package ar.edu.iua.iw3.controllers;
 
-
+import org.springframework.http.HttpHeaders;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 
 import ar.edu.iua.iw3.model.Product;
 import ar.edu.iua.iw3.model.business.BusinessException;
@@ -19,27 +19,37 @@ import ar.edu.iua.iw3.model.business.FoundException;
 import ar.edu.iua.iw3.model.business.IProductBusiness;
 import ar.edu.iua.iw3.util.IStandartResponseBusiness;
 
+//Clase puente entre http y Java
 @RestController
+//Gracias a @RequestMapping manejará el PATH que venga 
 @RequestMapping(Constants.URL_PRODUCTS)
 public class ProductRestController {
 
 	@Autowired
 	private IProductBusiness productBusiness;
+	
+	//El StandarResponse solo se usa cuando algo sale mal
 	@Autowired
 	private IStandartResponseBusiness response;
-
-	@GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> list() {
+	
+	//Con esto responde a petiones GET
+	//Lo que coloque dentro del "value" se suma al PATH=/api/v1/products
+	//"Produces": tipo de dato que produce a la salida y consumes: datos que recibe como parametro
+	@GetMapping(value="", produces = MediaType.APPLICATION_JSON_VALUE)
+	//Se usa la clase ResponseEntity para dar una respuesta formateada
+	public ResponseEntity<?> list(){
 		try {
 			return new ResponseEntity<>(productBusiness.list(), HttpStatus.OK);
 		} catch (BusinessException e) {
-
+			
+//Devuelve la instancia de IStandartResponseBusiness (response) en el primer parámetro para el desarrollador
+			//Luego el statusCode para mostrarlo en el navegador
 			return new ResponseEntity<>(response.build(HttpStatus.INTERNAL_SERVER_ERROR, e, e.getMessage()),
 					HttpStatus.INTERNAL_SERVER_ERROR);
-
 		}
-
+		
 	}
+	
 	
 	@PostMapping(value = "")
 	public ResponseEntity<?> add(@RequestBody Product product) {
@@ -54,5 +64,6 @@ public class ProductRestController {
 		} catch (FoundException e) {
 			return new ResponseEntity<>(response.build(HttpStatus.FOUND, e, e.getMessage()), HttpStatus.FOUND);
 		}
-	}
+	
+	
 }

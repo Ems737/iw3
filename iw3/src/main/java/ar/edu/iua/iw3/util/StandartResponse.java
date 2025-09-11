@@ -18,6 +18,7 @@ public class StandartResponse {
 
 	private String message;
 
+	//Con @JsonIgnore, no se va a mostrar ese valor en la respuesta
 	@JsonIgnore
 	private Throwable ex;
 
@@ -31,6 +32,8 @@ public class StandartResponse {
 	@JsonIgnore
 	private boolean devInfoEnabled; 
 	
+	//Éste Getter se va a ejecutar si la variable devInfo esta en true
+	//True en Dev, False en Prod
 	public String getDevInfo() {
 		if(devInfoEnabled) {
 			if(ex!=null) {
@@ -43,6 +46,8 @@ public class StandartResponse {
 		}
 	}
 	
+	//Con este Get anulo el Getter que me genera lombok
+	//suplantandoló por el creado
 	public String getMessage() {
 		if(message!=null)
 			return message;
@@ -57,5 +62,3 @@ public class StandartResponse {
   "dfevInfo":"kjdhkfghskdjfh"
  }
   */
-
-

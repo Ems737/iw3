@@ -11,25 +11,29 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
+//Para avisar a JPA que ésta clase es una Entidad y debe persistir con @Entity
+//Indicamos el nombre de la Tabla que persistirá. Table(name="nombre")
 @Entity
 @Table(name="products")
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @Setter
+@Getter
 public class Product {
-
+	//Para indicar cual será la clave primaria en la BD. @Id
+	//@Generate... Indica a JPA la forma generacion de claves primarias por cada nuevo valor
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(length = 100, unique=true)
+	//Indicamos que sera nombre unico, obrando entonces como clave secundaria
+	//Duda, ¿es case sensitive cuando le ponemos unique?
+	@Column(length = 100, unique = true)
 	private String product;
 	
+	//Le indico a que valor se traducirá en la BD
 	@Column(columnDefinition = "tinyint default 0")
 	private boolean stock = false;
 	
 	private double precio;
-	
 }

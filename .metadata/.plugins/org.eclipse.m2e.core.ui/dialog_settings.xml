@@ -3,6 +3,7 @@
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
 			<item value="/home/emanuel/IUA/4to/iw3/workspace/iw3"/>
+			<item value="/home/emanuel/IUA/4to/iw3/workspace/iw3_originalEMa"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>

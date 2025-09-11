@@ -15,10 +15,9 @@ public class FoundException extends Exception{
 	public FoundException(String message) {
 		super(message);
 	}
-
+	
 	@Builder
 	public FoundException(Throwable ex) {
 		super(ex);
 	}
-
 }

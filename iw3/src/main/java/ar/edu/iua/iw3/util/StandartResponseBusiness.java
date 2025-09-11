@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class StandartResponseBusiness implements IStandartResponseBusiness {
 
+	//Busca el valor de la variable dev.info.enabled en el application.properties
 	@Value("${dev.info.enabled:false}")
 	private boolean devInfoEnabled; 
 	

@@ -15,10 +15,9 @@ public class BusinessException extends Exception{
 	public BusinessException(String message) {
 		super(message);
 	}
-
+	
 	@Builder
 	public BusinessException(Throwable ex) {
 		super(ex);
 	}
-
 }

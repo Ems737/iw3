@@ -10,24 +10,33 @@ import ar.edu.iua.iw3.model.Product;
 import ar.edu.iua.iw3.model.persistence.ProductRepository;
 import lombok.extern.slf4j.Slf4j;
 
+//En la capa web siempre se trabaja con la Interfaz
+//con @Service Spring se encarga de hacer el new ProductBusiness
+
 @Service
 @Slf4j
 public class ProductBusiness implements IProductBusiness {
 
+	//Para cumplir con todas las funciones debo acceder a la BD
+	//Para lograr eso, necesito instanciar la interfaz ProductRepository, 
+	//De eso se encarga Spring
 	
+	//Con @Autowired digo a Spring que inyecte las dependencias (busque el objeto que implemente
+	//el ProductRepository y lo inserte en productDAO)
 	@Autowired
 	private ProductRepository productDAO;
-
+	
 	@Override
 	public List<Product> list() throws BusinessException {
 		
 		try {
 			return productDAO.findAll();
 		} catch (Exception e) {
+			// Logueamos el error
 			log.error(e.getMessage(), e);
+			//Llamo al constructor de BusinessException 
 			throw BusinessException.builder().ex(e).message(e.getMessage()).build();
 		}
-		
 	}
 
 	@Override
@@ -45,7 +54,6 @@ public class ProductBusiness implements IProductBusiness {
 		return r.get();
 	}
 
-
 	@Override
 	public Product load(String product) throws NotFoundException, BusinessException {
 		Optional<Product> r;
@@ -61,19 +69,20 @@ public class ProductBusiness implements IProductBusiness {
 		return r.get();
 	}
 
-
-
+//¿Duda, en que momento entre que trae el producto de la bd y lo guarda, se puede modificar??.
+//Porque parece que lo carga y ahi nomas lo guarda, sin "dar tiempo" de modificarlo
+//Misma duda para "Update"
 	@Override
 	public Product add(Product product) throws FoundException, BusinessException {
 
 		try {
 			load(product.getId());
-			throw FoundException.builder().message("Se encuentró el Producto id=" + product.getId()).build();
+			throw FoundException.builder().message("Se encontró el Producto id=" + product.getId()).build();
 		} catch (NotFoundException e) {
 		}
 		try {
 			load(product.getProduct());
-			throw FoundException.builder().message("Se encuentró el Producto '" + product.getProduct() +"'").build();
+			throw FoundException.builder().message("Se encontró el Producto '" + product.getProduct() +"'").build();
 		} catch (NotFoundException e) {
 		}
 
@@ -97,7 +106,7 @@ public class ProductBusiness implements IProductBusiness {
 	}
 
 
-
+//¿Osea que para borrar yo debo saber el ID?
 	@Override
 	public void delete(long id) throws NotFoundException, BusinessException {
 		load(id);
@@ -108,6 +117,5 @@ public class ProductBusiness implements IProductBusiness {
 			throw BusinessException.builder().ex(e).build();
 		}
 	}
-
 
 }
