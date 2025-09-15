@@ -11,7 +11,8 @@ import ar.edu.iua.iw3.model.persistence.ProductRepository;
 import lombok.extern.slf4j.Slf4j;
 
 //En la capa web siempre se trabaja con la Interfaz
-//con @Service Spring se encarga de hacer el new ProductBusiness
+//Con @Service, Spring se encarga de hacer el new ProductBusiness
+//Con @Service le decimos a Spring que es un candidato a la instanciación
 
 @Service
 @Slf4j
@@ -72,6 +73,7 @@ public class ProductBusiness implements IProductBusiness {
 //¿Duda, en que momento entre que trae el producto de la bd y lo guarda, se puede modificar??.
 //Porque parece que lo carga y ahi nomas lo guarda, sin "dar tiempo" de modificarlo
 //Misma duda para "Update"
+//Porque tenemos un FoundException con id si no lo pasamos por parametro porque es autogenerado??
 	@Override
 	public Product add(Product product) throws FoundException, BusinessException {
 
@@ -94,9 +96,21 @@ public class ProductBusiness implements IProductBusiness {
 		}
 	}
 
+	//Actualizamos un producto, lanzando una excepcion si no se encuentra y si hay otro producto 
+	// con distinto ID pero con el mismo nombre
 	@Override
-	public Product update(Product product) throws NotFoundException, BusinessException {
+	public Product update(Product product) throws FoundException, NotFoundException, BusinessException {
 		load(product.getId());
+		Optional<Product> nombreExistente=null;
+		try {
+			nombreExistente=productDAO.findByProductAndIdNot(product.getProduct(), product.getId());
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw BusinessException.builder().ex(e).build();
+		}
+		if(nombreExistente.isPresent()) {
+			throw FoundException.builder().message("Se encontró un Producto nombre=" + product.getProduct() +"'").build();
+		}
 		try {
 			return productDAO.save(product);
 		} catch (Exception e) {

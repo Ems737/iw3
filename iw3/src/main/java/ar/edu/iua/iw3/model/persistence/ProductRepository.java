@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-//Indico a JPA que va a ser un repositorio
+//Indico a JPA que va a ser un repositorio. Va aser el candidato a persistir
 //JpaRepository, clase tipada, recibe como argumento el tipo de la Entidad que se quiere manejar
 //y el tipo de la clave primaria/principal
 @Repository
@@ -19,5 +19,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 	//Esto genera una sentencia del tipo: SELECT * from products WHERE product=? en la BD
 	//Patron "Optional" existe para el caso de que no encontrar el producto en la BD
 	Optional<Product> findByProduct(String product);
+	
+	Optional<Product> findByProductAndIdNot(String product, long id);
 	
 }
