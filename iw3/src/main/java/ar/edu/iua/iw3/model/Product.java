@@ -5,6 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,8 +17,10 @@ import lombok.Setter;
 
 //Para avisar a JPA que ésta clase es una Entidad y debe persistir con @Entity
 //Indicamos el nombre de la Tabla que persistirá. Table(name="nombre")
+//@Inheritance Mostramos la estrategia de implementacion de extension de una clase 
 @Entity
 @Table(name="products")
+@Inheritance(strategy = InheritanceType.JOINED)
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -36,4 +42,10 @@ public class Product {
 	private boolean stock = false;
 	
 	private double precio;
+	
+	//Many productos to One category
+	@ManyToOne
+	//NOmbre de la clave foranea
+	@JoinColumn(name = "id_category", nullable = true)
+	private Category category;
 }

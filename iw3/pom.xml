@@ -77,11 +77,29 @@
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-lang3</artifactId>
 </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
 	</dependencies>
 
 
 <profiles>
 <!--Perfiles de ejecucion-->
+
+		<profile>
+			<id>cli1</id>
+			<properties>
+				<spring.profiles.active>cli1</spring.profiles.active>
+			</properties>
+		</profile>
+		<profile>
+			<id>cli2</id>
+			<properties>
+				<spring.profiles.active>cli2</spring.profiles.active>
+			</properties>
+		</profile>
+
 	<profile>
 		<id>mysqldev</id>
 		<properties>
