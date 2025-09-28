@@ -10,6 +10,10 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="21"/>
+			<item value="source"/>
+			<item value="UTF"/>
+			<item value="ResponseEntity&lt;"/>
 			<item value="location"/>
 			<item value="post"/>
 			<item value="add"/>
