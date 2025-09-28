@@ -34,7 +34,7 @@ public class Product {
 	
 	//Indicamos que sera nombre unico, obrando entonces como clave secundaria
 	//Duda, ¿es case sensitive cuando le ponemos unique?
-	@Column(length = 100, unique = true)
+	@Column(length = 100, unique = true, nullable = false)
 	private String product;
 	
 	//Le indico a que valor se traducirá en la BD

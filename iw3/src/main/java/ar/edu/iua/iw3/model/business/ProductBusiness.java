@@ -75,9 +75,11 @@ public class ProductBusiness implements IProductBusiness {
 //Misma duda para "Update"
 //Porque tenemos un FoundException con id si no lo pasamos por parametro porque es autogenerado??
 	@Override
-	public Product add(Product product) throws FoundException, BusinessException {
-
-		try {
+	public Product add(Product product) throws FoundException, BusinessException, NotNullException {
+		if (product.getProduct().isEmpty() ) {
+				throw NotNullException.builder().message("No es posible agregar un producto sin nombre").build();
+			}		
+			try {
 			load(product.getId());
 			throw FoundException.builder().message("Se encontró el Producto id=" + product.getId()).build();
 		} catch (NotFoundException e) {
@@ -93,8 +95,8 @@ public class ProductBusiness implements IProductBusiness {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			throw BusinessException.builder().ex(e).build();
-		}
-	}
+		}		
+	}	
 
 	//Actualizamos un producto, lanzando una excepcion si no se encuentra y si hay otro producto 
 	// con distinto ID pero con el mismo nombre

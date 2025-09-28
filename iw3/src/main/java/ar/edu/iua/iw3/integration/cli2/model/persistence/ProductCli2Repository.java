@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import ar.edu.iua.iw3.integration.cli2.model.ProductCli2;
 //import ar.edu.iua.iw3.integration.cli2.model.ProductCli2SlimView;
+import ar.edu.iua.iw3.integration.cli2.model.ProductCli2SlimView;
 
 @Repository
 public interface ProductCli2Repository extends JpaRepository<ProductCli2, Long> {
@@ -16,5 +17,5 @@ public interface ProductCli2Repository extends JpaRepository<ProductCli2, Long> 
 	//Muestra los que se vencen
 	public List<ProductCli2> findByExpirationDateBeforeOrderByExpirationDateDesc(Date expirationDate);
 	
-	//public List<ProductCli2SlimView> findByOrderByPrecioDesc();
+	public List<ProductCli2SlimView> findByOrderByPrecioDesc();
 }

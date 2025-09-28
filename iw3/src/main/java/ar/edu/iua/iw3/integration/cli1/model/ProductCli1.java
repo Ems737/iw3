@@ -1,6 +1,7 @@
 package ar.edu.iua.iw3.integration.cli1.model;
 
 import ar.edu.iua.iw3.model.Product;
+import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
@@ -12,6 +13,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name="cli1_producs")
+//@AttributeOverride(name="product", column=@Column(nullable = false))
 @PrimaryKeyJoinColumn(name="id_product")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,5 +23,4 @@ public class ProductCli1 extends Product{
 	
 	@Column(nullable=false, unique=true)
 	private String codCli1;
-
 }

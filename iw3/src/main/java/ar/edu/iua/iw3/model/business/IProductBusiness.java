@@ -15,7 +15,7 @@ public interface IProductBusiness {
 
 	public Product load(String product) throws NotFoundException, BusinessException;
 
-	public Product add(Product product) throws FoundException, BusinessException;
+	public Product add(Product product) throws FoundException, BusinessException, NotNullException;
 
 	public Product update(Product product) throws FoundException, NotFoundException, BusinessException;
 

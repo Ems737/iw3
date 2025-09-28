@@ -23,6 +23,7 @@ import ar.edu.iua.iw3.model.business.FoundException;
 import ar.edu.iua.iw3.model.business.ICategoryBusiness;
 import ar.edu.iua.iw3.model.business.IProductBusiness;
 import ar.edu.iua.iw3.model.business.NotFoundException;
+import ar.edu.iua.iw3.model.business.NotNullException;
 import ar.edu.iua.iw3.util.IStandartResponseBusiness;
 
 //Clase puente entre http y Java
@@ -72,6 +73,8 @@ public class ProductRestController {
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (FoundException e) {
 			return new ResponseEntity<>(response.build(HttpStatus.FOUND, e, e.getMessage()), HttpStatus.FOUND);
+		} catch (NotNullException e) {
+			return new ResponseEntity<>(response.build(HttpStatus.INTERNAL_SERVER_ERROR, e, e.getMessage()), HttpStatus.FOUND);
 		}
 	
 	}
